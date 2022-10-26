@@ -1,4 +1,4 @@
-const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam"
+const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam";
 
 const Cameras = []
 
@@ -75,4 +75,4 @@ CurrentInstance.ListJamCam().then(()=>{
 for (let index = 0; index < Cameras.length; index++) {
     const element = Cameras[index];
     element.CreateTile(document.querySelector("body"))
-}
+
