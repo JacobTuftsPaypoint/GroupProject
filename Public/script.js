@@ -14,6 +14,21 @@ class App {
       return result.json();
     });
   }
+
+  static async getSpecificJamCam(location) {
+    await App.JamCamRequest().then((result) => {
+      for (const camera of result) {
+        if (camera.commonName === location) {
+          console.log("Found Camera!");
+
+          console.log(camera);
+
+          break;
+        }
+      }
+    });
+  }
+
   static async ListAllJamCams() {
     await App.JamCamRequest().then((result) => {
       console.log(result);
@@ -21,4 +36,4 @@ class App {
   }
 }
 
-App.ListAllJamCams();
+App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
