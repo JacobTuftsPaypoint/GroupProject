@@ -14,11 +14,11 @@ class App {
       return result.json();
     });
   }
-  static async ListJamCam() {
+  static async ListAllJamCams() {
     await App.JamCamRequest().then((result) => {
       console.log(result);
     });
   }
 }
 
-App.ListJamCam();
+App.ListAllJamCams();
