@@ -56,7 +56,7 @@ class App {
   static async ListJamCam() {
     await App.JamCamRequest().then((result) => {
       result.forEach((element) => {
-        Cameras.push(new JamCam(element));
+        App.Cameras.push(new JamCam(element));
       });
     });
   }
