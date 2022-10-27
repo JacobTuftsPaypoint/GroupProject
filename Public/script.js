@@ -1,6 +1,4 @@
 const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam";
-
-const cameras = [];
 class JamCam {
   constructor(TempObj) {
     this.name = TempObj.commonName;
@@ -38,7 +36,6 @@ class JamCam {
 }
 
 class App {
-  constructor() {}
   static HTTPGet(Address) {
     return fetch(Address, {
       method: "get",
