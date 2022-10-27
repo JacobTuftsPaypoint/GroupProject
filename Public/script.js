@@ -40,7 +40,7 @@ class JamCam {
 
 class App {
   constructor() {}
-  HTTPGet(Address) {
+  static HTTPGet(Address) {
     return fetch(Address, {
       method: "get",
       headers: {
@@ -48,25 +48,36 @@ class App {
       },
     });
   }
-  JamCamRequest() {
-    return this.HTTPGet(JamCamEndpoint).then((result) => {
+
+  static JamCamRequest() {
+    return App.HTTPGet(JamCamEndpoint).then((result) => {
       return result.json();
     });
   }
-  async ListJamCam() {
-    await this.JamCamRequest().then((result) => {
+
+  static async ListJamCam() {
+    await App.JamCamRequest().then((result) => {
       result.forEach((element) => {
-        Cameras.push(new Asset(element));
+        Cameras.push(new JamCam(element));
       });
     });
   }
+
+  static async CreateJamCamTiles(DOMElement){
+    App.ListJamCam().then(()=>{
+        for (let i = 0; i < Cameras.length; i++) {
+            const element = Cameras[i];
+            element.CreateTile(DOMElement)
+        }
+    })
+    }
+    
   static async getSpecificJamCam(location) {
     await App.JamCamRequest().then((result) => {
       for (const camera of result) {
         if (camera.commonName === location) {
           console.log("Found Camera!");
 
-<<<<<<< Updated upstream
           console.log(camera);
 
           break;
@@ -77,29 +88,3 @@ class App {
 }
 
 App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
-=======
-    static async CreateJamCamTiles(DOMElement){
-        App.ListJamCam().then(()=>{
-            for (let i = 0; i < Cameras.length; i++) {
-                const element = Cameras[i];
-                element.CreateTile(DOMElement)
-            }
-        })
-    }
-
-    static async getSpecificJamCam(location) {
-        await App.JamCamRequest().then((result) => {
-            for (const camera of result) {
-                if (camera.commonName === location) {
-                    console.log("Found Camera!");
-                    console.log(camera);
-                    break;
-                }
-            }
-        });
-    }    
-}
-
-App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
-
->>>>>>> Stashed changes
