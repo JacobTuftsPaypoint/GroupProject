@@ -60,19 +60,19 @@ class App{
         });
        })
     }
+  static async getSpecificJamCam(location) {
+    await App.JamCamRequest().then((result) => {
+      for (const camera of result) {
+        if (camera.commonName === location) {
+          console.log("Found Camera!");
+
+          console.log(camera);
+
+          break;
+        }
+      }
+    });
+  }    
 }
 
-let CurrentInstance = new App
-
-CurrentInstance.ListJamCam().then(()=>{
-    for (let index = 0; index < Cameras.length; index++) {
-        console.log("text")
-        const element = Cameras[index];
-        element.CreateTile(document.querySelector("body"))
-    }
-})
-
-for (let index = 0; index < Cameras.length; index++) {
-    const element = Cameras[index];
-    element.CreateTile(document.querySelector("body"))
-
+App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
