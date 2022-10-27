@@ -1,4 +1,5 @@
 const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam";
+
 class JamCam {
   constructor(TempObj) {
     this.name = TempObj.commonName;
@@ -71,19 +72,60 @@ class App {
     });
   }
 
-  static async getSpecificJamCam(location) {
-    await App.JamCamRequest().then((result) => {
-      for (const camera of result) {
-        if (camera.commonName === location) {
-          console.log("Found Camera!");
+  static getSpecificJamCam(location) {
+    return new Promise((resolve, reject) => {
+      const specificCameras = [];
 
-          console.log(camera);
-
-          break;
+      App.cameras.forEach((camera) => {
+        if (camera.name === location) {
+          specificCameras.push(camera);
         }
+      });
+
+      if (specificCameras.length > 0) {
+        resolve(specificCameras);
+      } else {
+        reject("Camera is not present");
       }
     });
   }
 }
 
-App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
+const searchBar = document.querySelector("#search-bar");
+const searchButton = document.querySelector("#search-button");
+
+searchBar.addEventListener("keypress", (event) => {
+  if (event.key === "Enter" && searchBar.value.length > 0) {
+    App.getSpecificJamCam(searchBar.value).then((cameras) => {
+      const container = document.querySelector(".ListContainer");
+
+      container.innerHTML = "";
+
+      cameras.forEach((camera) => {
+        camera.CreateTile(container);
+      });
+    });
+  } else if (event.key === "Enter" && searchBar.value.length === 0) {
+    const container = document.querySelector(".ListContainer");
+    container.innerHTML = "";
+    App.CreateJamCamTiles(container);
+  }
+});
+
+searchButton.addEventListener("click", (event) => {
+  if (searchBar.value.length > 0) {
+    App.getSpecificJamCam(searchBar.value).then((cameras) => {
+      const container = document.querySelector(".ListContainer");
+
+      container.innerHTML = "";
+
+      cameras.forEach((camera) => {
+        camera.CreateTile(container);
+      });
+    });
+  } else if (searchBar.value.length === 0) {
+    const container = document.querySelector(".ListContainer");
+    container.innerHTML = "";
+    App.CreateJamCamTiles(container);
+  }
+});
