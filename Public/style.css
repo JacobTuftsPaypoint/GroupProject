@@ -52,3 +52,14 @@ header {
   padding: 30px;
   background-color: var(--drkr-colour);
 }
+
+#legend {
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column;
+}
