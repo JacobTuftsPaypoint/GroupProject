@@ -66,6 +66,7 @@ class App{
         if (camera.commonName === location) {
           console.log("Found Camera!");
 
+<<<<<<< Updated upstream
           console.log(camera);
 
           break;
@@ -76,3 +77,29 @@ class App{
 }
 
 App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
+=======
+    static async CreateJamCamTiles(DOMElement){
+        App.ListJamCam().then(()=>{
+            for (let i = 0; i < Cameras.length; i++) {
+                const element = Cameras[i];
+                element.CreateTile(DOMElement)
+            }
+        })
+    }
+
+    static async getSpecificJamCam(location) {
+        await App.JamCamRequest().then((result) => {
+            for (const camera of result) {
+                if (camera.commonName === location) {
+                    console.log("Found Camera!");
+                    console.log(camera);
+                    break;
+                }
+            }
+        });
+    }    
+}
+
+App.getSpecificJamCam("A3 West Hill/Up Richmond Rd");
+
+>>>>>>> Stashed changes
