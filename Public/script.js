@@ -72,6 +72,7 @@ class App {
     })
     }
     
+
   static async getSpecificJamCam(location) {
     await App.JamCamRequest().then((result) => {
       for (const camera of result) {
