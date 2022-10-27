@@ -15,7 +15,9 @@ class JamCam {
     let tile = document.createElement("section");
     let name = document.createElement("h4");
     let latp = document.createElement("p");
+    latp.id = "latp"
     let lonp = document.createElement("p");
+    lonp.id = "lonp"
     let img = document.createElement("img");
 
     if (this.status == "true") {
