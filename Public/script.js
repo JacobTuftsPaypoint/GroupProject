@@ -39,7 +39,6 @@ class JamCam {
 }
 
 class App {
-  constructor() {}
   HTTPGet(Address) {
     return fetch(Address, {
       method: "get",
