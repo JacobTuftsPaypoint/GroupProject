@@ -58,13 +58,14 @@ class App {
       result.forEach((element) => {
         App.cameras.push(new JamCam(element));
       });
+      console.log(App.cameras.length);
     });
   }
 
   static async CreateJamCamTiles(DOMElement) {
     App.ListJamCam().then(() => {
-      for (let i = 0; i < Cameras.length; i++) {
-        const element = Cameras[i];
+      for (let i = 0; i < App.cameras.length; i++) {
+        const element = App.cameras[i];
         element.CreateTile(DOMElement);
       }
     });
