@@ -1,4 +1,7 @@
 const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam";
+const SpeedCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/SpeedCam"
+const RedLightCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/RedLightCam"
+const RedLightAndSpeedCamerasEndpoint = "https://api.tfl.gov.uk/Place/Type/RedLightAndSpeedCam"
 
 class Map {
   constructor() {
@@ -81,6 +84,9 @@ class JamCam {
 
 class App {
   static cameras = [];
+  static SpeedCameras = [];
+  static RedLightCameras = [];
+  static RedLightAndSpeedCameras = [];
 
   static HTTPGet(Address) {
     return fetch(Address, {
