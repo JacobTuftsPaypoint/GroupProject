@@ -36,6 +36,8 @@ class JamCam {
 }
 
 class App {
+  static cameras = [];
+
   static HTTPGet(Address) {
     return fetch(Address, {
       method: "get",
