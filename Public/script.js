@@ -11,8 +11,8 @@ class Map {
       });
 
       App.ListJamCam().then(() => {
-        for (let i = 0; i < Cameras.length; i++) {
-          const element = Cameras[i];
+        for (let i = 0; i < App.cameras.length; i++) {
+          const element = App.cameras[i];
           const marker = new google.maps.Marker({
             position: { lat: element.lat, lng: element.lon },
             map: map,
@@ -134,41 +134,45 @@ class App {
   }
 }
 
-const searchBar = document.querySelector("#search-bar");
-const searchButton = document.querySelector("#search-button");
+try {
+  const searchBar = document.querySelector("#search-bar");
+  const searchButton = document.querySelector("#search-button");
 
-searchBar.addEventListener("keypress", (event) => {
-  if (event.key === "Enter" && searchBar.value.length > 0) {
-    App.getSpecificJamCam(searchBar.value).then((cameras) => {
-      const container = document.querySelector(".ListContainer");
+  searchBar.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" && searchBar.value.length > 0) {
+      App.getSpecificJamCam(searchBar.value).then((cameras) => {
+        const container = document.querySelector(".ListContainer");
 
-      container.innerHTML = "";
+        container.innerHTML = "";
 
-      cameras.forEach((camera) => {
-        camera.CreateTile(container);
+        cameras.forEach((camera) => {
+          camera.CreateTile(container);
+        });
       });
-    });
-  } else if (event.key === "Enter" && searchBar.value.length === 0) {
-    const container = document.querySelector(".ListContainer");
-    container.innerHTML = "";
-    App.CreateJamCamTiles(container);
-  }
-});
-
-searchButton.addEventListener("click", (event) => {
-  if (searchBar.value.length > 0) {
-    App.getSpecificJamCam(searchBar.value).then((cameras) => {
+    } else if (event.key === "Enter" && searchBar.value.length === 0) {
       const container = document.querySelector(".ListContainer");
-
       container.innerHTML = "";
+      App.CreateJamCamTiles(container);
+    }
+  });
 
-      cameras.forEach((camera) => {
-        camera.CreateTile(container);
+  searchButton.addEventListener("click", (event) => {
+    if (searchBar.value.length > 0) {
+      App.getSpecificJamCam(searchBar.value).then((cameras) => {
+        const container = document.querySelector(".ListContainer");
+
+        container.innerHTML = "";
+
+        cameras.forEach((camera) => {
+          camera.CreateTile(container);
+        });
       });
-    });
-  } else if (searchBar.value.length === 0) {
-    const container = document.querySelector(".ListContainer");
-    container.innerHTML = "";
-    App.CreateJamCamTiles(container);
-  }
-});
+    } else if (searchBar.value.length === 0) {
+      const container = document.querySelector(".ListContainer");
+      container.innerHTML = "";
+      App.CreateJamCamTiles(container);
+    }
+  });
+} catch {
+  console.log("Not present");
+}
