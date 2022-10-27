@@ -39,7 +39,8 @@ class JamCam {
 }
 
 class App {
-  HTTPGet(Address) {
+  constructor() {}
+  static HTTPGet(Address) {
     return fetch(Address, {
       method: "get",
       headers: {
@@ -47,18 +48,31 @@ class App {
       },
     });
   }
-  JamCamRequest() {
-    return this.HTTPGet(JamCamEndpoint).then((result) => {
+
+  static JamCamRequest() {
+    return App.HTTPGet(JamCamEndpoint).then((result) => {
       return result.json();
     });
   }
-  async ListJamCam() {
-    await this.JamCamRequest().then((result) => {
+
+  static async ListJamCam() {
+    await App.JamCamRequest().then((result) => {
       result.forEach((element) => {
-        Cameras.push(new Asset(element));
+        Cameras.push(new JamCam(element));
       });
     });
   }
+
+  static async CreateJamCamTiles(DOMElement){
+    App.ListJamCam().then(()=>{
+        for (let i = 0; i < Cameras.length; i++) {
+            const element = Cameras[i];
+            element.CreateTile(DOMElement)
+        }
+    })
+    }
+    
+
   static async getSpecificJamCam(location) {
     await App.JamCamRequest().then((result) => {
       for (const camera of result) {

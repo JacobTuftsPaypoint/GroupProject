@@ -1,4 +1,13 @@
+:root{
+    
+}
+
 body{
+    margin: 0;
+    padding: 0;
+}
+
+.ListContainer{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row wrap;  
 }
