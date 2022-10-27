@@ -1,4 +1,13 @@
-:root {
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+#search {
+  width: 50vw;
+  margin-bottom: 5vh;
 }
 
 body {
