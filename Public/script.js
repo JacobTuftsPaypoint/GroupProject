@@ -77,7 +77,7 @@ class App {
       const specificCameras = [];
 
       App.cameras.forEach((camera) => {
-        if (camera.name === location) {
+        if (camera.name.includes(location)) {
           specificCameras.push(camera);
         }
       });
