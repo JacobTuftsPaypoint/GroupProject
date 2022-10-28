@@ -309,8 +309,6 @@ class App {
         }
       });
 
-      console.log(specificCameras);
-
       if (specificCameras.length > 0) {
         resolve(specificCameras);
       } else {
