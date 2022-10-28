@@ -28,14 +28,14 @@ class Map {
             content: `<h2 style="color:black">${element.name}</h2><br><a href="${element.VideoUrl}" style="font-size:2rem" target="_blank">Video Link</a><br><img src="${element.ImageUrl}">`,
             ariaLabel: element.name,
           });
-          const tempelement = document.querySelector("#legend")
-          tempelement.addEventListener("click",()=>{
+          const tempelement = document.querySelector("#legend");
+          tempelement.addEventListener("click", () => {
             for (const child of tempelement.children) {
               if (child.nodeName != "H1") {
-                child.classList.toggle("hidden") 
+                child.classList.toggle("hidden");
               }
             }
-          })
+          });
           marker.addListener("click", () => {
             try {
               this.PreviousWindow.close();
