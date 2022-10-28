@@ -77,10 +77,15 @@ class App {
       const specificCameras = [];
 
       App.cameras.forEach((camera) => {
-        if (camera.name.includes(location)) {
+        if (
+          camera.name.includes(location) ||
+          camera.name.toLowerCase().includes(location.toLowerCase())
+        ) {
           specificCameras.push(camera);
         }
       });
+
+      console.log(specificCameras);
 
       if (specificCameras.length > 0) {
         resolve(specificCameras);
@@ -97,6 +102,8 @@ const searchButton = document.querySelector("#search-button");
 searchBar.addEventListener("keypress", (event) => {
   if (event.key === "Enter" && searchBar.value.length > 0) {
     App.getSpecificJamCam(searchBar.value).then((cameras) => {
+      console.log(cameras);
+
       const container = document.querySelector(".ListContainer");
 
       container.innerHTML = "";
@@ -126,6 +133,7 @@ searchButton.addEventListener("click", (event) => {
   } else if (searchBar.value.length === 0) {
     const container = document.querySelector(".ListContainer");
     container.innerHTML = "";
+    App.cameras = [];
     App.CreateJamCamTiles(container);
   }
 });
