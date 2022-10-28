@@ -1,7 +1,8 @@
 const JamCamEndpoint = "https://api.tfl.gov.uk/Place/Type/JamCam";
-const SpeedCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/SpeedCam"
-const RedLightCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/RedLightCam"
-const RedLightAndSpeedCamerasEndpoint = "https://api.tfl.gov.uk/Place/Type/RedLightAndSpeedCam"
+const SpeedCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/SpeedCam";
+const RedLightCameraEndpoint = "https://api.tfl.gov.uk/Place/Type/RedLightCam";
+const RedLightAndSpeedCamerasEndpoint =
+  "https://api.tfl.gov.uk/Place/Type/RedLightAndSpeedCam";
 
 class Map {
   constructor() {
@@ -20,8 +21,8 @@ class Map {
             position: { lat: element.lat, lng: element.lon },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-            }
+              url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            },
           });
           const infowindow = new google.maps.InfoWindow({
             content: `<h2 style="color:black">${element.name}</h2><br><a href="${element.VideoUrl}" style="font-size:2rem" target="_blank">Video Link</a><br><img src="${element.ImageUrl}">`,
@@ -56,8 +57,8 @@ class Map {
             position: { lat: element.lat, lng: element.lon },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-            }
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            },
           });
           const infowindow = new google.maps.InfoWindow({
             content: `<h1 style="color:black">Speed Camera</h1><br><h2 style="color:black">${element.name}</h2><br><h3 style="color:red; font-weight:bold">${element.speed}mph</h3>`,
@@ -84,8 +85,8 @@ class Map {
             position: { lat: element.lat, lng: element.lon },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-              }
+              url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            },
           });
           const infowindow = new google.maps.InfoWindow({
             content: `<h1 style="color:black">Red Light Camera</h1><br><h2 style="color:black">${element.name}</h2>`,
@@ -112,8 +113,8 @@ class Map {
             position: { lat: element.lat, lng: element.lon },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
-            }
+              url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+            },
           });
           const infowindow = new google.maps.InfoWindow({
             content: `<h1 style="color:black">Red Light & Speed Camera</h1><br><h2 style="color:black">${element.name}</h2><br><h3 style="color:red; font-weight:bold">${element.speed}mph</h3>`,
@@ -132,7 +133,7 @@ class Map {
             this.PreviousWindow = infowindow;
           });
         }
-      }); 
+      });
 
       map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
@@ -156,7 +157,7 @@ class JamCam {
     latp.id = "latp";
     let lonp = document.createElement("p");
     lonp.id = "lonp";
-    let vidlink = document.createElement("a")
+    let vidlink = document.createElement("a");
     let img = document.createElement("img");
 
     if (this.status == "true") {
@@ -165,20 +166,20 @@ class JamCam {
       name.style.backgroundColor = "red";
     }
 
-    vidlink.setAttribute("href",this.VideoUrl)
-    vidlink.setAttribute("target","_blank")
-    vidlink.innerText = "Video clip"
+    vidlink.setAttribute("href", this.VideoUrl);
+    vidlink.setAttribute("target", "_blank");
+    vidlink.innerText = "Video clip";
 
     name.innerText = this.name;
     latp.innerHTML = `<b>Latitude:</b> ${this.lat}`;
-    lonp.innerHTML =`<b>Longitude:</b> ${this.lon}`;
+    lonp.innerHTML = `<b>Longitude:</b> ${this.lon}`;
 
     img.setAttribute("src", this.ImageUrl);
 
     tile.appendChild(name);
     tile.appendChild(latp);
     tile.appendChild(lonp);
-    tile.appendChild(vidlink)
+    tile.appendChild(vidlink);
     tile.appendChild(img);
 
     Container.appendChild(tile);
@@ -186,29 +187,29 @@ class JamCam {
 }
 
 class SpeedCamera {
-    constructor(TempObj){
-        this.name = TempObj.commonName
-        this.lat = TempObj.lat
-        this.lon = TempObj.lon
-        this.speed = TempObj.additionalProperties[0].value
-    }
+  constructor(TempObj) {
+    this.name = TempObj.commonName;
+    this.lat = TempObj.lat;
+    this.lon = TempObj.lon;
+    this.speed = TempObj.additionalProperties[0].value;
+  }
 }
 
 class RedLightCamera {
-    constructor(TempObj){
-        this.name = TempObj.commonName
-        this.lat = TempObj.lat
-        this.lon = TempObj.lon
-    }
+  constructor(TempObj) {
+    this.name = TempObj.commonName;
+    this.lat = TempObj.lat;
+    this.lon = TempObj.lon;
+  }
 }
 
 class RedLightAndSpeedCamera {
-    constructor(TempObj){
-        this.name = TempObj.commonName
-        this.lat = TempObj.lat
-        this.lon = TempObj.lon
-        this.speed = TempObj.additionalProperties[0].value
-    }
+  constructor(TempObj) {
+    this.name = TempObj.commonName;
+    this.lat = TempObj.lat;
+    this.lon = TempObj.lon;
+    this.speed = TempObj.additionalProperties[0].value;
+  }
 }
 
 class App {
@@ -300,10 +301,15 @@ class App {
       const specificCameras = [];
 
       App.cameras.forEach((camera) => {
-        if (camera.name === location) {
+        if (
+          camera.name.includes(location) ||
+          camera.name.toLowerCase().includes(location.toLowerCase())
+        ) {
           specificCameras.push(camera);
         }
       });
+
+      console.log(specificCameras);
 
       if (specificCameras.length > 0) {
         resolve(specificCameras);
