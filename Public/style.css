@@ -93,3 +93,7 @@ img {
     display: flex;
     flex-flow: column;
 }
+
+.hidden{
+  display: none;
+}
