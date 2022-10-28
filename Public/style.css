@@ -20,6 +20,28 @@ body {
 .ListContainer {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+.ListContainer section {
+  border-radius: 0.5rem;
+  background-color: var(--drk-colour);
+}
+.ListContainer img {
+  margin: 0.5rem;
+}
+.ListContainer h4 {
+  text-align: center;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.1rem;
+}
+.ListContainer a {
+  text-decoration: none;
+  color: cornflowerblue;
+  font-weight: bold;
+  display: block;
 }
 
 nav {
