@@ -24,7 +24,7 @@ class Map {
             }
           });
           const infowindow = new google.maps.InfoWindow({
-            content: `<h2 style="color:black">${element.name}</h2><br><img src="${element.ImageUrl}">`,
+            content: `<h2 style="color:black">${element.name}</h2><br><a href="${element.VideoUrl}" style="font-size:2rem" target="_blank">Video Link</a><br><img src="${element.ImageUrl}">`,
             ariaLabel: element.name,
           });
           marker.addListener("click", () => {
@@ -148,22 +148,29 @@ class JamCam {
     latp.id = "latp";
     let lonp = document.createElement("p");
     lonp.id = "lonp";
+    let vidlink = document.createElement("a")
     let img = document.createElement("img");
 
     if (this.status == "true") {
-      tile.style.backgroundColor = "green";
+      name.style.backgroundColor = "green";
     } else {
-      tile.style.backgroundColor = "red";
+      name.style.backgroundColor = "red";
     }
 
+    vidlink.setAttribute("href",this.VideoUrl)
+    vidlink.setAttribute("target","_blank")
+    vidlink.innerText = "Video clip"
+
     name.innerText = this.name;
-    latp.innerText = this.lat;
-    lonp.innerText = this.lon;
+    latp.innerHTML = `<b>Latitude:</b> ${this.lat}`;
+    lonp.innerHTML =`<b>Longitude:</b> ${this.lon}`;
+
     img.setAttribute("src", this.ImageUrl);
 
     tile.appendChild(name);
     tile.appendChild(latp);
     tile.appendChild(lonp);
+    tile.appendChild(vidlink)
     tile.appendChild(img);
 
     Container.appendChild(tile);
