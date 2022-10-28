@@ -31,6 +31,15 @@
   margin-left: 0.5vw;
   border: 1px solid white;
 }
+
+#filter-container {
+  margin-left: 5vw;
+}
+
+#filter-label {
+  font-size: 0.8em;
+}
+
 body {
   color: var(--main-txt-colour);
   margin: 0;
