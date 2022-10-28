@@ -30,6 +30,11 @@
   color: white;
   margin-left: 0.5vw;
   border: 1px solid white;
+  transition: background-color 0.1s linear;
+}
+
+#search-button:active {
+  background-color: var(--sp-colour);
 }
 
 #filter-container {
