@@ -95,7 +95,7 @@ header {
   background-color: var(--drkr-colour);
   text-align: center;
 }
-img {
+.row img {
   width: 200px;
   height: 200px;
   display: block;
@@ -116,4 +116,8 @@ img {
   margin: 0.5rem;
   display: flex;
   flex-flow: column;
+}
+
+.hidden {
+  display: none;
 }
