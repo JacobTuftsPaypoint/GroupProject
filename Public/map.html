@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="script.js"></script>
+    <script>new Map</script>
+    <style>
+        #map{
+            width: 100%;
+            height: 100vh;
+        }   
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="list.html">Search</a></li>
+    </nav>
+    <header>
+        Map
+    </header>
+    <div id="map"></div>
+    <div id="legend">
+        <h1>Legend</h1>
+        <div>
+            <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png">
+            <h2>Jam Cams</h2>
+        </div>
+        <div>
+            <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png">
+            <h2>Red Light Cams</h2>
+        </div>
+        <div>
+            <img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png">
+            <h2>Speed Cams</h2>
+        </div>
+        <div>
+            <img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png">
+            <h2>Red Light and Speed Cams</h2>
+        </div>
+    </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK7KRJuJzZRX0-8CA8WnJ2uflh91a9cwU&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
